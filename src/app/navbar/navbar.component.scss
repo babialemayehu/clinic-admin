@@ -1,0 +1,25 @@
+$nav-height: 54px; 
+
+#menuDropdown{
+  width:auto !important;
+}
+nav{
+  height: 56px !important ; 
+  line-height: 56px; 
+  a{
+    height: 56px !important ; 
+    line-height: 50px; 
+  }
+ #nav-mobile{
+  height: 56px !important ; 
+  line-height: 56px; 
+   >li{
+    height: 56px !important ;
+    line-height: 56px; 
+    >a{
+      height: 56px !important ;
+      line-height: 56px; 
+    }
+   }
+ }
+}

@@ -1,0 +1,45 @@
+@import "../node_modules/materialize-css/dist/css/materialize.min.css"; 
+@import '~@angular/material/theming'; 
+
+@include mat-core(); 
+
+$primary: mat-palette($mat-blue, 700, 500, 300); 
+$accent: mat-palette($mat-yellow, A400, A200, A600); 
+// $warn: mat-palette($mat-red);
+
+
+$theme: mat-light-theme(
+    $primary, 
+    $accent
+); 
+
+@include angular-material-theme($theme); 
+
+.primary{ background-color: mat-color($primary) }
+.accent{ background-color: mat-color($accent); i  { color: black } }
+.accent:hover{background-color: mat-color($accent, A400); }
+
+.progress{
+    background-color: mat-color($accent, A100); 
+    .indeterminate{ background-color: mat-color($accent, A400)}
+}
+
+input{margin-bottom: 2px}
+form.container{width: 90%}
+header{ margin-bottom: 2em}
+.mat-form-field-wrapper{margin-bottom: .3em}
+.mat-form-field {width: 100%}
+
+.mat-dialog-container{
+    padding-left: 0px !important; 
+    padding-right: 0px !important; 
+}
+.progress{
+    margin-top: 0px;
+    top: -24px; 
+}
+.form-loading{
+    pointer-events: none; 
+    opacity: .3; 
+}
+.hide{ display: none}
