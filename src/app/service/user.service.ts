@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+import { User } from '../model/User'; 
+import { Pagination } from '../model/Pagination'; 
 
 @Injectable({
   providedIn: 'root'
@@ -17,5 +21,15 @@ export class UserService {
   authUser(){
     let $url = this.root+"/ajax/get/auth user"
     return this.http.get($url); 
+  }
+
+  getUsers(pagination = 25, from = 1): Observable<User[]>{
+    let $url = this.root+"/ajax/get/users"; 
+    return this.http.get<User[]>($url); 
+  }
+
+  totalUsers(): Observable<number>{
+    let $url = this.root+ "/ajax/get/total users"; 
+    return this.http.get<number>($url); 
   }
 }

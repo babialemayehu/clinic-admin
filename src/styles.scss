@@ -23,7 +23,9 @@ $theme: mat-light-theme(
     background-color: mat-color($accent, A100); 
     .indeterminate{ background-color: mat-color($accent, A400)}
 }
-
+tr.mat-row:hover{
+    background-color: darken($color: #ddd, $amount: 0.1); 
+}
 input{margin-bottom: 2px}
 form.container{width: 90%}
 header{ margin-bottom: 2em}

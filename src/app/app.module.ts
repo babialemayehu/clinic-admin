@@ -40,6 +40,10 @@ import {
 } from '@angular/material';
 import { UsersComponent } from './users/users.component';
 
+// SERVICE PROVIDERS
+import { UserService } from './service/user.service';
+import { UserTableComponent } from './user-table/user-table.component'; 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,6 +55,7 @@ import { UsersComponent } from './users/users.component';
     AlertComponent,
     DashboardComponent,
     UsersComponent,
+    UserTableComponent,
   ],
   imports: [
     BrowserModule, 
@@ -80,6 +85,7 @@ import { UsersComponent } from './users/users.component';
     AlertComponent,  
   ], 
   providers: [
+    UserService, 
   ],
   bootstrap: [AppComponent]
 }) 

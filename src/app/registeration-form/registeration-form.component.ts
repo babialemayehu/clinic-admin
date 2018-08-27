@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, Input, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material'; 
 import { FormGroup, FormBuilder , Validators} from '@angular/forms';
 
@@ -19,6 +19,11 @@ export class RegisterationFormComponent implements OnInit {
   public loading = false; 
   public regForm: FormGroup; 
   public roles: object; 
+  public regOprationMode = 'new'; 
+  @Input()
+  set value(user: User) {
+    this.regForm.setValue(user); 
+  }
 
   constructor(
     public thisDialog: MatDialogRef<RegisterationFormComponent>, 
@@ -38,11 +43,17 @@ export class RegisterationFormComponent implements OnInit {
       email: ['', [Validators.required,Validators.email]],
       phone: ['', [Validators.required]],
     }); 
+    if(typeof this.data.user !== 'undefined'){
+      this.regForm.patchValue(this.data.user);
+      this.regOprationMode = 'update'; 
+    } 
   }
   onSubmit(){
     this.loading = true; 
     this._user.postCreateUser(this.regForm.value).subscribe(
       responce => {
+        window.location.href="user"; 
+        this.thisDialog.close(true);
         M.toast({
           classes: 'green white-text', 
           // @ts-ignore
