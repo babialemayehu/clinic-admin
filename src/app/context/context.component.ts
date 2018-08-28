@@ -9,11 +9,18 @@ import { ContextMenuComponent } from '../context-menu/context-menu.component';
 export class ContextComponent implements OnInit {
 
   menu = ContextMenuComponent; 
+  items: [
+    {icon:'', text: 'baseline' },
+    {icon:'build', text: 'build' },
+    {icon:'backup', text: 'backup' },
+    {icon:'adb', text: 'backup' },
+    {icon:'add', text: 'backup' }
+  ];
   constructor() { }
   ngOnInit() {
     
   }
   handleClose(e) {
-    console.log('this it'); 
+    console.log('laskdfjlasdkf'); 
   }
 }

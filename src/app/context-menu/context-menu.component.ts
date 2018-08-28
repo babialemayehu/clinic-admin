@@ -25,18 +25,24 @@ import { MenuComponent } from '../../lib/menu.component';
       transition('* => *', animate('120ms ease-in')),
     ]),
   ],
+  host: {
+    '[@menu]': '_state',
+    '(@menu.done)': '_onAnimationDone($event)',
+  }
 })
 export class ContextMenuComponent extends MenuComponent {
-
+  public items; 
   constructor(
     public menuPackage: MenuPackage,
     public contextMenuService: ContextMenuService,
   ) {
     super(menuPackage, contextMenuService);
+    this.items = menuPackage.context;
   }
 
   onClick(e) {
-    console.log(e); 
+    // console.log(e); 
+    this.contextMenuService.closeAll(e);  
   }
 
 }

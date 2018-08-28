@@ -5,6 +5,7 @@ import { UserService } from '../service/user.service';
 import { MatDialog } from '@angular/material'; 
 import { RegisterationFormComponent } from '../registeration-form/registeration-form.component'; 
 import { RoleService } from '../service/role.service'; 
+import { ContextMenuComponent } from '../context-menu/context-menu.component'; 
 
 @Component({
   selector: 'app-user-table',
@@ -16,8 +17,13 @@ export class UserTableComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   dataSource: UserTableDataSource;
 
-  /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['worker_id', 'name', 'role' , 'phone', 'gender' , 'email'];
+
+  contextMenu = ContextMenuComponent; 
+  menuItems = [
+    {icon: 'edit', text:'Edit'}
+  ];
+
+  displayedColumns = ['worker_id', 'name', 'role' , 'gender'/* , 'email' , 'phone'*/];
   public roles; 
   constructor(public registrationDialog: MatDialog,  public _roles: RoleService, public _user: UserService){}
   ngOnInit() {
@@ -25,7 +31,6 @@ export class UserTableComponent implements OnInit {
 
     this._user.getUsers().subscribe(
       data =>{
-        console.log(data); 
         this.dataSource = new UserTableDataSource(this.paginator, this.sort, data);
       }
     );
@@ -35,13 +40,14 @@ export class UserTableComponent implements OnInit {
       }
     )
   }
-  onContextMenu(user){
+  onContextMenu(responce){
     let dialog = this.registrationDialog.open(RegisterationFormComponent,{
       width: '600px', 
       data: {
         roles: this.roles,
-        user: user
+        user: responce.data
       }, 
     } ); 
+    console.log(responce); 
   }
 }
