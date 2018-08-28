@@ -17,7 +17,7 @@ export class AppComponent {
       M.AutoInit(); 
     });
   }
-  
+    
   ok(){ 
     let alertRef = this.alert.open(AlertComponent, {
       data: {

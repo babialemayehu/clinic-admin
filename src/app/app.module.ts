@@ -11,7 +11,6 @@ import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router'; 
 
 import { MatInputModule} from '@angular/material/input';
-import { TestComponent } from './test/test.component';
 import { LayoutModule } from '@angular/cdk/layout';
 
 import { NavbarComponent } from './navbar/navbar.component';
@@ -37,17 +36,23 @@ import {
   MatSortModule, 
   MatDialogModule,  
   MatSelectModule, 
+
 } from '@angular/material';
 import { UsersComponent } from './users/users.component';
 
 // SERVICE PROVIDERS
 import { UserService } from './service/user.service';
-import { UserTableComponent } from './user-table/user-table.component'; 
+import { UserTableComponent } from './user-table/user-table.component';
+
+// context menu
+import { ContextComponent } from './context/context.component';
+// import { ContextMenu } from './context/context.menu';
+import { ContextMenuModule } from '../lib/context-menu.module';
+import { ContextMenuComponent } from './context-menu/context-menu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TestComponent,
     NavbarComponent,
     SidenavComponent,
     FloatingActionBtnComponent,
@@ -56,6 +61,9 @@ import { UserTableComponent } from './user-table/user-table.component';
     DashboardComponent,
     UsersComponent,
     UserTableComponent,
+    ContextComponent,
+    ContextMenuComponent
+    // ContextMenu,
   ],
   imports: [
     BrowserModule, 
@@ -79,10 +87,14 @@ import { UserTableComponent } from './user-table/user-table.component';
     MatSortModule, 
     MatDialogModule, 
     MatSelectModule,
+    ContextMenuModule,
+   
   ],
   entryComponents: [
     RegisterationFormComponent, 
-    AlertComponent,  
+    AlertComponent, 
+    // ContextMenu, 
+    ContextMenuComponent,
   ], 
   providers: [
     UserService, 

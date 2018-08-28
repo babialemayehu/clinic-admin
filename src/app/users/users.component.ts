@@ -11,5 +11,7 @@ export class UsersComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  onContextMenu(e){
+    console.log(e); 
+  }
 }
