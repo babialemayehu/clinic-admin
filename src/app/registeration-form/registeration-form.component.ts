@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder , Validators} from '@angular/forms';
 
 import { RoleService } from '../service/role.service'; 
 import { UserService } from '../service/user.service'; 
+import { CommonMessageService as Message }  from '../service/common-message.service'; 
 
 import { User } from '../model/User'; 
 
@@ -29,11 +30,13 @@ export class RegisterationFormComponent implements OnInit {
     public thisDialog: MatDialogRef<RegisterationFormComponent>, 
     @Inject(MAT_DIALOG_DATA) public data:any, 
     public formBuilder: FormBuilder, 
-    public _user: UserService
+    public _user: UserService, 
+    public _message: Message
   ) { }
 
   ngOnInit() {
     this.regForm = this.formBuilder.group({
+      id:[''],
       worker_id: ['', [Validators.required]], 
       first_name: ['', [Validators.required]], 
       father_name: ['', [ Validators.required]], 
@@ -50,32 +53,39 @@ export class RegisterationFormComponent implements OnInit {
   }
   onSubmit(){
     this.loading = true; 
+    if(this.regOprationMode != 'update'){
+      this._new(); 
+    }else{
+      this.update(); 
+    } 
+     
+  }
+  _new(){
     this._user.postCreateUser(this.regForm.value).subscribe(
       responce => {
-        window.location.href="user"; 
+        window.location.href="/user"; 
         this.thisDialog.close(true);
-        M.toast({
-          classes: 'green white-text', 
-          // @ts-ignore
-          html: '<strong>You have succefully created account for <b> '+responce.first_name+' </b></strong>'
-        }) 
+        this._message.httpSuccess('created account for <b> '+responce.first_name);
       }, 
       error => {
         this.loading = false;
-        let message = ''; 
-
-        if(error.status == 0) message = "Error: Please check your connection!"; 
-        else if(error.status == 500 ) message = "Error: we have got some problem please try again letter"; 
-        else message = "Some error occured"; 
-        
-        M.toast({
-          classes: 'red white-text', 
-          html: '<strong>'+ message +'</strong>'
-        })
+        this._message.httpError(error); 
       }
     ) 
   }
-
+  update(){
+    this._user.updateUser(this.regForm.value).subscribe(
+      responce => {
+        window.location.href="/user"; 
+        this.thisDialog.close(true);
+        this._message.httpSuccess('created account for <b> '+responce.first_name);
+      }, 
+      error => {
+        this.loading = false;
+        this._message.httpError(error); 
+      }
+    )  
+  }
   get worker_id(){return this.regForm.get("worker_id"); }
   get first_name(){return this.regForm.get("first_name"); }
   get father_name(){return this.regForm.get("father_name"); }

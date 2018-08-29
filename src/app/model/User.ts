@@ -9,8 +9,8 @@ export class User {
     public role_id: number,
     public email: string,
     public phone: string,
-    public isFirstTime?: number,
     public profile_pic?: string,
+    public isFirstTime?: number,
     public created_at?: string,
     public updated_at?: string ){}
   

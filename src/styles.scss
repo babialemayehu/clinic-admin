@@ -15,9 +15,20 @@ $theme: mat-light-theme(
 
 @include angular-material-theme($theme); 
 
+//  Html modifcation
+dl{
+    dt{font-weight: 500}
+
+}
+// Color
 .primary{ background-color: mat-color($primary) }
 .accent{ background-color: mat-color($accent); i  { color: black } }
 .accent:hover{background-color: mat-color($accent, A400); }
+
+//  Text topography
+.secondery{ color: lighten(#555, .5)}
+.smaill { font-size: .8em }
+.larg-text { font-size: 1.3em }
 
 .progress{
     background-color: mat-color($accent, A100); 

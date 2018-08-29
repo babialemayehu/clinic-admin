@@ -13,9 +13,14 @@ export class UserService {
   public root = "http://clinic.com"; 
   constructor(public http:HttpClient) { }
 
-  postCreateUser(data){
+  postCreateUser(data): Observable<User>{
     let $url = this.root+"/ajax/post/create user"; 
-    return this.http.post($url,data); 
+    return this.http.post<User>($url,data); 
+  }
+  
+  updateUser(data): Observable<User>{
+    let $url = this.root+"/ajax/update/user"; 
+    return this.http.put<User>($url, data); 
   }
   
   authUser(){
@@ -31,5 +36,10 @@ export class UserService {
   totalUsers(): Observable<number>{
     let $url = this.root+ "/ajax/get/total users"; 
     return this.http.get<number>($url); 
+  }
+
+  userProfile(workerId): Observable<User>{
+    let $url = this.root+"/ajax/get/user profile/"+workerId; 
+    return this.http.get<User>($url);
   }
 }

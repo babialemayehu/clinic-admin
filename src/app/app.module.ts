@@ -49,6 +49,9 @@ import { ContextComponent } from './context/context.component';
 // import { ContextMenu } from './context/context.menu';
 import { ContextMenuModule } from '../lib/context-menu.module';
 import { ContextMenuComponent } from './context-menu/context-menu.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { UserProfileModalComponent } from './user-profile-modal/user-profile-modal.component';
+import { UserProfileRouteComponent } from './user-profile-route/user-profile-route.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +65,10 @@ import { ContextMenuComponent } from './context-menu/context-menu.component';
     UsersComponent,
     UserTableComponent,
     ContextComponent,
-    ContextMenuComponent
+    ContextMenuComponent,
+    UserProfileComponent,
+    UserProfileModalComponent,
+    UserProfileRouteComponent
     // ContextMenu,
   ],
   imports: [
@@ -95,6 +101,8 @@ import { ContextMenuComponent } from './context-menu/context-menu.component';
     AlertComponent, 
     // ContextMenu, 
     ContextMenuComponent,
+    UserProfileModalComponent,
+
   ], 
   providers: [
     UserService, 
