@@ -1,4 +1,15 @@
+<div class="conatiner" id="search">
+  <div class="row">
+      <form [formGroup]= 'form' >
+          <mat-form-field  class="col">
+              <input matInput formControlName="search" placeholder="First Name">
+              
+           </mat-form-field>
+      </form>
+  </div>
+</div>
 <div class="mat-elevation-z8">
+   
   <table mat-table #table [dataSource]="dataSource" matSort aria-label="Elements">
     <!-- Id Column -->
     <ng-container matColumnDef="worker_id">
@@ -41,6 +52,7 @@
     [contextMenuTrigger]="contextMenu" 
     [menuContext]="{items: menuItems, data: row }"
     (menuAction)="onContextMenu($event)"
+    (click)="onUserClick(row)"
     ></tr>
   </table>
 

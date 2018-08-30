@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core' ;
+import { FormGroup, FormBuilder , Validators} from '@angular/forms';
 import { MatPaginator, MatSort } from '@angular/material' ;
 import { UserTableDataSource } from './user-table-datasource' ;
 import { UserService } from '../service/user.service' ; 
@@ -20,7 +21,7 @@ export class UserTableComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort ;
   dataSource: UserTableDataSource ;
 
-
+  form: FormGroup;
   contextMenu = ContextMenuComponent ; 
   menuItems = [
     {icon: 'edit', text: 'Edit'},
@@ -32,7 +33,11 @@ export class UserTableComponent implements OnInit {
   public roles ; 
   public users: User[] ;
 
-  constructor(public modal: MatDialog,  public _roles: RoleService, public _user: UserService){}
+  constructor(
+    public modal: MatDialog, 
+    public _roles: RoleService, 
+    public _user: UserService,
+    public _formBuilder: FormBuilder){}
   ngOnInit() {
     this.dataSource = new UserTableDataSource(this.paginator, this.sort, []) ;
 
@@ -47,72 +52,92 @@ export class UserTableComponent implements OnInit {
         this.roles = result ; 
       }
     )
+
+    this.form = this._formBuilder.group(
+      { search: [""] }
+    );
+    this.form.statusChanges.subscribe(
+      key => {
+        console.log(key);
+      }
+    )
+  
+  }
+  editUser(responce){
+    let registerDialog = this.modal.open(RegisterationFormComponent,{
+      width: '600px', 
+      data: {
+        roles: this.roles,
+        user: responce.data
+      },
+    }) ; 
+
+    registerDialog.afterClosed().subscribe(
+      (responce) => {
+        if(responce.responce){
+         
+          let i = this.users.findIndex(function(value: User){ 
+            return (responce.data.id == value.id);
+          });
+          this.users[i] = responce.data;
+          this.dataSource = new UserTableDataSource(this.paginator, this.sort, this.users) ;
+        } 
+      }
+    ) ;
+  }
+  userProfile($user){
+    return this.modal.open(UserProfileModalComponent,{
+      width: '600px',
+      data: {
+        user: $user
+      },
+    }) ;
+
+    // profileDialog.afterClosed().subscribe(
+    //   responce => {
+    //     console.log(responce) ; 
+    //   }
+    // ) ;
+  }
+  removeUser(responce){
+    let deleteDialog = this.modal.open(AlertComponent, {
+      data:{
+        title: "Remove User", 
+        message: "Are you shure? Do you want to remove <b>"+responce.data.first_name+ " " +responce.data.father_name + "</b>",
+        dialog: "confirm",
+        data: responce.data,
+      }
+    }) ; 
+
+    deleteDialog.afterClosed().subscribe(
+      confirmed => {
+        if(confirmed.responce){
+          this._user.deleteUser(confirmed.data.id).subscribe(
+            responce => {
+              let newTableData = this.users.filter(function(value, index, arr){
+                return value != confirmed.data; 
+              }); 
+              this.dataSource = new UserTableDataSource(this.paginator, this.sort, newTableData) ;
+            }
+          ) ; 
+        } 
+      }
+    )
   }
   onContextMenu(responce) {
     switch(responce.index) {
       case 0: 
-        let registerDialog = this.modal.open(RegisterationFormComponent,{
-          width: '600px', 
-          data: {
-            roles: this.roles,
-            user: responce.data
-          },
-        }) ; 
-
-        registerDialog.afterClosed().subscribe(
-          (responce) => {
-            if(responce.responce){
-             
-              let i = this.users.findIndex(function(value: User){ 
-                return (responce.data.id == value.id);
-              });
-              this.users[i] = responce.data;
-              this.dataSource = new UserTableDataSource(this.paginator, this.sort, this.users) ;
-            } 
-          }
-        ) ;
+        this.editUser(responce); 
         break ;
       case 1: 
-        let profileDialog = this.modal.open(UserProfileModalComponent,{
-          width: '600px',
-          data: {
-            user: responce.data
-          },
-        }) ;
-
-        profileDialog.afterClosed().subscribe(
-          responce => {
-            console.log(responce) ; 
-          }
-        ) ;
+        this.userProfile(responce); 
       break ; 
       case 2:
-        let deleteDialog = this.modal.open(AlertComponent, {
-          data:{
-            title: "Remove User", 
-            message: "Are you shure? Do you want to remove <b>"+responce.data.first_name+ " " +responce.data.father_name + "</b>",
-            dialog: "confirm",
-            data: responce.data,
-          }
-        }) ; 
-
-        deleteDialog.afterClosed().subscribe(
-          confirmed => {
-            if(confirmed.responce){
-              this._user.deleteUser(confirmed.data.id).subscribe(
-                responce => {
-                  let newTableData = this.users.filter(function(value, index, arr){
-                    return value != confirmed.data; 
-                  }); 
-                  this.dataSource = new UserTableDataSource(this.paginator, this.sort, newTableData) ;
-                }
-              ) ; 
-            } 
-          }
-        )
+        this.removeUser(responce); 
       break ;
-    }
-   
-    console.log(responce) ; 
+    } 
+  }
+  onUserClick(user){
+    this.userProfile(user);
   }
 }
