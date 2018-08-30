@@ -17,9 +17,19 @@ export class AlertComponent implements OnInit {
   }
 
   close(){
-    this.thisDialog.close(false); 
+    this.thisDialog.close(
+      {
+      responce: false, 
+      data: null
+    }); 
   }
   confirm(){
-    this.thisDialog.close(true); 
+    console.log(this.data); 
+    this.thisDialog.close(
+      {
+        responce: true, 
+        data: this.data.data
+      }
+    ); 
   }
 }

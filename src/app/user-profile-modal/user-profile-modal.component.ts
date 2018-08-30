@@ -14,6 +14,7 @@ export class UserProfileModalComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log(this.data); 
   }
 
 }

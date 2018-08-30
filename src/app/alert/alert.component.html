@@ -1,7 +1,7 @@
 <div class="head-color {{data.color}}" ></div>
 <div class="container" style="width: 400px; padding: 0px 10% 0px 10%;"> 
   <h5 style="margin-top: 0px">{{data.title}}</h5> 
-  <p>{{data.message}}</p>
+  <p [innerHTML]="data.message"></p>
   
   <strong>
     <button (click)="confirm()" mat-button class="right white black-text ">OK</button>

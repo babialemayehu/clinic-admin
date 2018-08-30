@@ -5,7 +5,7 @@
 
 $primary: mat-palette($mat-blue, 700, 500, 300); 
 $accent: mat-palette($mat-yellow, A400, A200, A600); 
-// $warn: mat-palette($mat-red);
+$warn: mat-palette($mat-red);
 
 
 $theme: mat-light-theme(
@@ -24,7 +24,7 @@ dl{
 .primary{ background-color: mat-color($primary) }
 .accent{ background-color: mat-color($accent); i  { color: black } }
 .accent:hover{background-color: mat-color($accent, A400); }
-
+.danger-text{ color: mat-color($warn)}
 //  Text topography
 .secondery{ color: lighten(#555, .5)}
 .smaill { font-size: .8em }

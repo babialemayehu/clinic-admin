@@ -26,6 +26,12 @@ export class FloatingActionBtnComponent implements OnInit {
       data: {
         roles: this.roles,
       }, 
-    } ); 
+    });
+    
+    dialog.afterClosed().subscribe(
+      responce => {
+        console.log(responce); 
+      }
+    );
   }
 }

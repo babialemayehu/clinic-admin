@@ -18,19 +18,5 @@ export class AppComponent {
     });
   }
     
-  ok(){ 
-    let alertRef = this.alert.open(AlertComponent, {
-      data: {
-        title: "the title", 
-        type: "error", 
-        message: "Theis the massesage ", 
-        color: 'green',
-        dialog: 'confirm'
-      }
-    }); 
 
-    alertRef.afterClosed().subscribe(
-      result => {console.log(result); }
-    ); 
-  }
 }

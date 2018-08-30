@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { UserService } from "../service/user.service"; 
 import { User } from "../model/User";
@@ -9,8 +9,10 @@ import { User } from "../model/User";
   styleUrls: ['./user-profile.component.scss']
 })
 export class UserProfileComponent implements OnInit {
-  public user: User;
   public param; 
+
+  @Input() user: User; 
+
   constructor(
     private route: ActivatedRoute, 
     private _user: UserService) { 
@@ -18,13 +20,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.params.subscribe( param => {
-      this._user.userProfile(param.worker_id).subscribe(
-        (responce: User) => {
-          this.user = responce;
-        }
-      ) 
-    })
+    
   }
 
 }

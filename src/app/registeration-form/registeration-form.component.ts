@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material'; 
 import { FormGroup, FormBuilder , Validators} from '@angular/forms';
+import { Router } from '@angular/router'; 
 
 import { RoleService } from '../service/role.service'; 
 import { UserService } from '../service/user.service'; 
@@ -30,6 +31,7 @@ export class RegisterationFormComponent implements OnInit {
     public thisDialog: MatDialogRef<RegisterationFormComponent>, 
     @Inject(MAT_DIALOG_DATA) public data:any, 
     public formBuilder: FormBuilder, 
+    public _route: Router, 
     public _user: UserService, 
     public _message: Message
   ) { }
@@ -63,26 +65,27 @@ export class RegisterationFormComponent implements OnInit {
   _new(){
     this._user.postCreateUser(this.regForm.value).subscribe(
       responce => {
-        window.location.href="/user"; 
-        this.thisDialog.close(true);
+        // window.location.href="/user"; 
+        this._route.navigate(['/users='+responce.worker_id]);
+        this.thisDialog.close({responce:true,opration:'create', data: responce});
         this._message.httpSuccess('created account for <b> '+responce.first_name);
       }, 
       error => {
         this.loading = false;
-        this._message.httpError(error); 
+        this._message.httpError({responce:false, operation:'create',data: error}); 
       }
     ) 
   }
   update(){
     this._user.updateUser(this.regForm.value).subscribe(
       responce => {
-        window.location.href="/user"; 
-        this.thisDialog.close(true);
+        //window.location.href="/user"; 
+        this.thisDialog.close({responce:true,opration:'update', data: responce});
         this._message.httpSuccess('created account for <b> '+responce.first_name);
       }, 
       error => {
         this.loading = false;
-        this._message.httpError(error); 
+        this._message.httpError({responce:false, operation:'update',data: error}); 
       }
     )  
   }

@@ -42,4 +42,9 @@ export class UserService {
     let $url = this.root+"/ajax/get/user profile/"+workerId; 
     return this.http.get<User>($url);
   }
+  
+  deleteUser(id): Observable<number>{
+    let $url = this.root+"/ajax/delete/user/"+id; 
+    return this.http.delete<number>($url); 
+  }
 }
