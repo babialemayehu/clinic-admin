@@ -21,8 +21,10 @@
     "@angular/platform-browser-dynamic": "^6.1.0",
     "@angular/router": "^6.1.0",
     "@ctrl/ngx-rightclick": "^1.1.2",
+    "@types/string": "0.0.29",
     "core-js": "^2.5.4",
     "rxjs": "^6.0.0",
+    "string": "^3.3.3",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {

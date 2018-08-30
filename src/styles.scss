@@ -24,11 +24,13 @@ dl{
 .primary{ background-color: mat-color($primary) }
 .accent{ background-color: mat-color($accent); i  { color: black } }
 .accent:hover{background-color: mat-color($accent, A400); }
-.danger-text{ color: mat-color($warn)}
+.danger-text{ color: mat-color($warn, 500)}
 //  Text topography
 .secondery{ color: lighten(#555, .5)}
 .smaill { font-size: .8em }
 .larg-text { font-size: 1.3em }
+
+.character-counter{display:none}
 
 .progress{
     background-color: mat-color($accent, A100); 

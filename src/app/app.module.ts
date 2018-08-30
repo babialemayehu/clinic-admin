@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { appRoutes } from './routes'; 
 
 import 'materialize-css'; 
+import 'string';
 
 import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms'; 

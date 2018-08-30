@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material'; 
 import { AlertComponent } from  './alert/alert.component'
 
+
 declare var M; 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

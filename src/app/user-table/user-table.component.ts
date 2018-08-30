@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core' ;
-import { FormGroup, FormBuilder , Validators} from '@angular/forms';
+import { FormGroup, FormBuilder , FormControl,Validators} from '@angular/forms';
 import { MatPaginator, MatSort } from '@angular/material' ;
 import { UserTableDataSource } from './user-table-datasource' ;
 import { UserService } from '../service/user.service' ; 
@@ -10,19 +10,29 @@ import { ContextMenuComponent } from '../context-menu/context-menu.component' ;
 import { UserProfileModalComponent } from '../user-profile-modal/user-profile-modal.component' ;
 import { AlertComponent } from '../alert/alert.component' ; 
 import { User } from '../model/User' ; 
+import * as S from 'string';
+import { Z_FILTERED } from 'zlib';
+
 
 @Component({
   selector: 'app-user-table',
   templateUrl: './user-table.component.html',
   styleUrls: ['./user-table.component.scss']
 })
+
 export class UserTableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator ;
   @ViewChild(MatSort) sort: MatSort ;
   dataSource: UserTableDataSource ;
 
-  form: FormGroup;
+  searchForm: FormGroup;
   contextMenu = ContextMenuComponent ; 
+  message = {
+    isThere: false, 
+    class: '',
+    text: '',
+  };
+
   menuItems = [
     {icon: 'edit', text: 'Edit'},
     {icon: 'visibility', text: 'View profile'},
@@ -53,15 +63,45 @@ export class UserTableComponent implements OnInit {
       }
     )
 
-    this.form = this._formBuilder.group(
-      { search: [""] }
+    this.searchForm = this._formBuilder.group(
+      { 
+        search: '',
+        role: '' 
+      }
     );
-    this.form.statusChanges.subscribe(
-      key => {
-        console.log(key);
+    this.searchForm.valueChanges.subscribe(
+      key=>{
+        let filtered;
+
+        if(key.role == '')
+          filtered = this.search(key.search); 
+        else
+          filtered = this.search(key.search).filter((v,i,a)=>{return v.role_id == key.role});
+
+        if(filtered.length == 0){
+          this.message = { isThere: true, class: "danger-text",text: "No results found" }
+        }else{
+          this.message.isThere = false; 
+        }
+        
+        this.dataSource = new UserTableDataSource(this.paginator, this.sort, filtered) ;
       }
     )
-  
+  }
+  search(key){
+      key = key.toLowerCase();
+    let start = this.users.filter((value, inxex,arr)=>{
+      return  S((value.worker_id).toLowerCase()).startsWith(key)||
+              S((value.first_name +" "+ value.father_name + " " +value.grand_father_name).toLowerCase()).startsWith(key)
+    });
+    let contains = this.users.filter((value, index, arr)=>{     
+      return (S((value.worker_id).toLowerCase()).contains(key)||
+              S((value.first_name + " " + value.father_name + " " + value.grand_father_name).toLowerCase()).contains(key))
+              &&
+              !(S((value.worker_id).toLowerCase()).startsWith(key)||
+              S((value.first_name +" "+ value.father_name + " " +value.grand_father_name).toLowerCase()).startsWith(key));
+      });
+    return start.concat(contains); 
   }
   editUser(responce){
     let registerDialog = this.modal.open(RegisterationFormComponent,{
@@ -136,8 +176,5 @@ export class UserTableComponent implements OnInit {
         this.removeUser(responce); 
       break ;
     } 
-  }
-  onUserClick(user){
-    this.userProfile(user);
   }
 }

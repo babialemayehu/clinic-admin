@@ -3,7 +3,6 @@ import { MatPaginator, MatSort } from '@angular/material';
 import { map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
 import { User } from '../model/User'; 
-import { UserService } from '../service/user.service'; 
 
 export class UserTableDataSource extends DataSource<User> {
 
@@ -21,7 +20,6 @@ export class UserTableDataSource extends DataSource<User> {
     this.paginator.length = this.data.length;
 
     return merge(...dataMutations).pipe(map(() => {
-      console.log("next"); 
       return this.getPagedData(this.getSortedData([...this.data]));
     }));
   }
@@ -44,10 +42,8 @@ export class UserTableDataSource extends DataSource<User> {
       switch (this.sort.active) {
         case 'name': return compare(a.first_name, b.first_name, isAsc);
         case 'id': return compare(+a.id, +b.id, isAsc);
-        case 'role': return compare(a.first_name, b.first_name, isAsc);
-        case 'phone': return compare(+a.id, +b.id, isAsc);
-        case 'gender': return compare(a.first_name, b.first_name, isAsc);
-        case 'email': return compare(+a.id, +b.id, isAsc);
+        case 'role': return compare(a.role, b.role, isAsc);
+        case 'gender': return compare(a.gender, b.gender, isAsc);
         default: return 0;
       }
     });
