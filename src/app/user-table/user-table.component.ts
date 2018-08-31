@@ -39,7 +39,7 @@ export class UserTableComponent implements OnInit {
     {icon: 'delete', text: 'Remove user'},
   ] ;
 
-  displayedColumns = ['worker_id', 'name', 'role' , 'gender'/* , 'email' , 'phone'*/] ;
+  displayedColumns = ["profile_pic",'worker_id', 'name', 'role' /*, 'gender' , 'email' , 'phone'*/] ;
   public roles ; 
   public users: User[] ;
 
@@ -83,7 +83,7 @@ export class UserTableComponent implements OnInit {
         }else{
           this.message.isThere = false; 
         }
-        
+
         this.dataSource = new UserTableDataSource(this.paginator, this.sort, filtered) ;
       }
     )

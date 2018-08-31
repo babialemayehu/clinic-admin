@@ -53,6 +53,9 @@ import { ContextMenuComponent } from './context-menu/context-menu.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserProfileModalComponent } from './user-profile-modal/user-profile-modal.component';
 import { UserProfileRouteComponent } from './user-profile-route/user-profile-route.component';
+import { SettingsComponent } from './settings/settings.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { ChangePasswordRouteComponent } from './change-password-route/change-password-route.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +72,10 @@ import { UserProfileRouteComponent } from './user-profile-route/user-profile-rou
     ContextMenuComponent,
     UserProfileComponent,
     UserProfileModalComponent,
-    UserProfileRouteComponent
+    UserProfileRouteComponent,
+    SettingsComponent,
+    ChangePasswordComponent,
+    ChangePasswordRouteComponent
     // ContextMenu,
   ],
   imports: [

@@ -31,13 +31,13 @@
 
     <!-- Profile pic  Column -->
     <ng-container matColumnDef="profile_pic">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
-      <td mat-cell *matCellDef="let row"><img class="circle reponsive-img"/></td>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>profile pic</th>
+      <td mat-cell *matCellDef="let row"><img [src]="'http://clinic.com/img/'+row.profile_pic" class="profile-pic circle reponsive-img"/></td>
     </ng-container>
 
     <!-- Id Column -->
     <ng-container matColumnDef="worker_id">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Worker Id</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>dWorker Id</th>
       <td mat-cell *matCellDef="let row">{{row.worker_id}}</td>
     </ng-container>
 

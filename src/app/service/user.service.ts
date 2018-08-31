@@ -23,9 +23,9 @@ export class UserService {
     return this.http.put<User>($url, data); 
   }
   
-  authUser(){
+  authUser(): Observable<User>{
     let $url = this.root+"/ajax/get/auth user"
-    return this.http.get($url); 
+    return this.http.get<User>($url); 
   }
 
   getUsers(pagination = 25, from = 1): Observable<User[]>{

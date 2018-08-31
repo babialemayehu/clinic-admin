@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material'; 
-import { AlertComponent } from  './alert/alert.component'
-
-
+import { User } from './model/User'; 
+import { UserService } from './service/user.service'; 
 declare var M; 
 
 @Component({
@@ -12,12 +11,14 @@ declare var M;
 })
 export class AppComponent {
   title = 'admin2';
-  constructor(public alert: MatDialog) { }
+
+  constructor(public alert: MatDialog, public _user: UserService) { }
 
   ngOnInit(){
     document.addEventListener('DOMContentLoaded', function() {
       M.AutoInit(); 
     });
+   
   }
     
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { UserService } from '../service/user.service'; 
 import { User } from '../model/User'; 
 
@@ -9,24 +9,25 @@ import { User } from '../model/User';
   providers: [UserService]
 })
 export class SidenavComponent implements OnInit {
-  public $auth: object; 
+  
+  @ViewChild('profileImageContainer') profileImageContainer; 
+  $auth: User; 
+  public profilePic: string; 
+
   constructor(public _user: UserService) {
-    this.$auth  = {
-      fist_name: '', 
-      father_name: '', 
-      email: '', 
-    }
-    // this.$auth.first_name = ''; 
-    // this.$auth.father_name = ''; 
-    // this.$auth.email = ''; 
+     
+  }
+
+  ngOnInit() {
     this._user.authUser().subscribe(
       result => {
         this.$auth = result; 
+        this.profilePic = result.profile_pic;
+        // let img = document.createElement('img');
+        // img.classList.add('reponsive-img'); 
+        // img.src = result.profile_pic; 
+        // this.profileImageContainer.nativeElement.appendChild(img);
       }
-    ) 
-   }
-
-  ngOnInit() {
-   
+    ); 
   }
 }
