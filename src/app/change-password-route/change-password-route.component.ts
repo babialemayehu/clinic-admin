@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router'; 
 
 @Component({
   selector: 'app-change-password-route',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChangePasswordRouteComponent implements OnInit {
 
-  constructor() { }
+  constructor(public _route: Router) { }
 
   ngOnInit() {
   }
-
+  onStatusChange(status){
+    if(status){
+      this._route.navigate(['/settings']);
+    } 
+  }
 }

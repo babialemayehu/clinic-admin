@@ -66,7 +66,7 @@ export class RegisterationFormComponent implements OnInit {
     this._user.postCreateUser(this.regForm.value).subscribe(
       responce => {
         // window.location.href="/user"; 
-        this._route.navigate(['/users='+responce.worker_id]);
+        this._route.navigate(['/'+responce.worker_id]);
         this.thisDialog.close({responce:true,opration:'create', data: responce});
         this._message.httpSuccess('created account for <b> '+responce.first_name);
       }, 

@@ -11,6 +11,7 @@ export class CommonMessageService {
     let message = ''; 
 
     if(error.status == 0) message = "Error: Please check your connection!"; 
+    else if(error.status == 406) message = "Error: " + error.message; 
     else if(error.status == 500 ) message = "Error: we have got some problem please try again letter"; 
     else message = "Some error occured"; 
     

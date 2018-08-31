@@ -16,10 +16,8 @@ $theme: mat-light-theme(
 @include angular-material-theme($theme); 
 
 //  Html modifcation
-dl{
-    dt{font-weight: 500}
-
-}
+dl{dt{font-weight: 500}}
+button:focus{ background: darken($color: #ddd, $amount: 0.1)}
 // Color
 .primary{ background-color: mat-color($primary) }
 .accent{ background-color: mat-color($accent); i  { color: black } }
@@ -31,10 +29,19 @@ dl{
 .larg-text { font-size: 1.3em }
 
 .character-counter{display:none}
+.mat-card.form-container{
+    padding: 0px; 
+    padding-top: 24px; 
+    padding-bottom: 15%;
+    section{
+        padding-left: 10%; 
+        padding-right: 10%; 
+    }
+}
 
 .progress{
     background-color: mat-color($accent, A100); 
-    .indeterminate{ background-color: mat-color($accent, A400)}
+    .indeterminate{ background-color: darken(mat-color($accent, A400),0.6)}
 }
 tr.mat-row:hover{
     background-color: darken($color: #ddd, $amount: 0.1); 
@@ -58,3 +65,4 @@ header{ margin-bottom: 2em}
     opacity: .3; 
 }
 .hide{ display: none}
+ 

@@ -9,6 +9,7 @@ import { Pagination } from '../model/Pagination';
   providedIn: 'root'
 })
 export class UserService {
+  
 
   public root = "http://clinic.com"; 
   constructor(public http:HttpClient) { }
@@ -46,5 +47,15 @@ export class UserService {
   deleteUser(id): Observable<number>{
     let $url = this.root+"/ajax/delete/user/"+id; 
     return this.http.delete<number>($url); 
+  }
+
+  currentPassword(password): Observable<boolean>{
+    let $url = this.root+"/ajax/post/isCurrentPassword";
+    return this.http.post<boolean>($url, {currentPassword: password});
+  }
+  
+  changePassword(current: string, newPassword: string): Observable<boolean> {
+    let $url = this.root+"/ajax/update/password"; 
+    return this.http.put<boolean>($url , {currentPassword:current, newPassword: newPassword}); 
   }
 }
