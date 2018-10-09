@@ -11,7 +11,7 @@ import { Pagination } from '../model/Pagination';
 export class UserService {
   
 
-  public root = "http://clinic.com"; 
+  public root = "http://clinic"; 
   constructor(public http:HttpClient) { }
 
   postCreateUser(data): Observable<User>{

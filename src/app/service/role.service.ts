@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class RoleService {
-  public root = 'http://clinic.com'; 
+  public root = 'http://clinic'; 
   constructor(public http:HttpClient) { }
   getRoles(){
     let $url = this.root+"/ajax/get/roles except admin"; 
