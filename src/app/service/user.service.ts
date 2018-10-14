@@ -58,4 +58,11 @@ export class UserService {
     let $url = this.root+"/ajax/update/password"; 
     return this.http.put<boolean>($url , {currentPassword:current, newPassword: newPassword}); 
   }
+
+  uploadPic(img: File): Observable<User>{
+    let $url = this.root + "/ajax/file/upload/profile pic" 
+    const fd = new FormData(); 
+    fd.append('image', img, img.name); 
+    return this.http.post<User>($url, fd); 
+  }
 }

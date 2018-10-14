@@ -24,7 +24,8 @@ export class FloatingActionBtnComponent implements OnInit {
     let dialog = this.registrationDialog.open(RegisterationFormComponent,{
       width: '600px', 
       data: {
-        roles: this.roles,
+        roles: this.roles, 
+        disableClose: true
       }, 
     });
     

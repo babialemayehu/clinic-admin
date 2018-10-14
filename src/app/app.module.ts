@@ -37,6 +37,9 @@ import {
   MatSortModule, 
   MatDialogModule,  
   MatSelectModule, 
+  MatAutocompleteModule, 
+  MatDatepickerModule,
+  MatNativeDateModule,
 
 } from '@angular/material';
 import { UsersComponent } from './users/users.component';
@@ -56,6 +59,15 @@ import { UserProfileRouteComponent } from './user-profile-route/user-profile-rou
 import { SettingsComponent } from './settings/settings.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { ChangePasswordRouteComponent } from './change-password-route/change-password-route.component';
+import { PatinetViewComponent } from './patinet-view/patinet-view.component';
+import { RecentVisitsComponent } from './recent-visits/recent-visits.component';
+import { CardTitleComponent } from './card-title/card-title.component';
+import { QueueMinComponent } from './queue-min/queue-min.component';
+import { QueueComponent } from './queue/queue.component';
+import { VisitsComponent } from './visits/visits.component';
+import { SetupDialogComponent } from './setup-dialog/setup-dialog.component';
+import { UploadComponent } from './upload_profile_pic/upload/upload.component';
+import { RouteComponent } from './upload_profile_pic/route/route.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +87,17 @@ import { ChangePasswordRouteComponent } from './change-password-route/change-pas
     UserProfileRouteComponent,
     SettingsComponent,
     ChangePasswordComponent,
-    ChangePasswordRouteComponent
+    ChangePasswordRouteComponent,
+    PatinetViewComponent,
+    RecentVisitsComponent,
+    CardTitleComponent,
+    QueueMinComponent,
+    QueueComponent,
+    VisitsComponent,
+    SetupDialogComponent,
+    UploadComponent,
+    RouteComponent,
+   
     // ContextMenu,
   ],
   imports: [
@@ -100,8 +122,10 @@ import { ChangePasswordRouteComponent } from './change-password-route/change-pas
     MatSortModule, 
     MatDialogModule, 
     MatSelectModule,
+    MatAutocompleteModule,
     ContextMenuModule,
-   
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   entryComponents: [
     RegisterationFormComponent, 
@@ -109,6 +133,7 @@ import { ChangePasswordRouteComponent } from './change-password-route/change-pas
     // ContextMenu, 
     ContextMenuComponent,
     UserProfileModalComponent,
+    SetupDialogComponent
 
   ], 
   providers: [
