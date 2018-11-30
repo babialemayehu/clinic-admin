@@ -7,10 +7,13 @@ import { ChangePasswordRouteComponent } from './change-password-route/change-pas
 import { QueueComponent } from './queue/queue.component'; 
 import { VisitsComponent } from './visits/visits.component';
 import { RouteComponent as UploadProfile } from './upload_profile_pic/route/route.component';
+import { DrugsComponent } from './drugs/drugs.component'; 
+import { OrdersListComponent } from './orders-list/orders-list.component';
 
 export const appRoutes: Routes = [
     {path: '', component: DashboardComponent },
     {path: 'users', component: UsersComponent },
+    {path: 'drugs', component: OrdersListComponent }, 
     {path: 'settings', component: SettingsComponent }, 
     //{path: ':worker_id', component: UserProfileRouteComponent}, 
     {path: 'queue', component: QueueComponent },

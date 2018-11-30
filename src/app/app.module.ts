@@ -68,6 +68,11 @@ import { VisitsComponent } from './visits/visits.component';
 import { SetupDialogComponent } from './setup-dialog/setup-dialog.component';
 import { UploadComponent } from './upload_profile_pic/upload/upload.component';
 import { RouteComponent } from './upload_profile_pic/route/route.component';
+import { DrugsComponent } from './drugs/drugs.component';
+import { DrugsTableComponent } from './drugs/drugs-table/drugs-table.component';
+import { OrdersTableComponent } from './orders-table/orders-table.component';
+import { OrdersListComponent } from './orders-list/orders-list.component';
+import { OrderedDrugsComponent } from './ordered-drugs/ordered-drugs.component';
 
 @NgModule({
   declarations: [
@@ -97,7 +102,11 @@ import { RouteComponent } from './upload_profile_pic/route/route.component';
     SetupDialogComponent,
     UploadComponent,
     RouteComponent,
-   
+    DrugsComponent,
+    DrugsTableComponent,
+    OrdersTableComponent,
+    OrdersListComponent,
+    OrderedDrugsComponent
     // ContextMenu,
   ],
   imports: [
