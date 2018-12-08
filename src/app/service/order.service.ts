@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Order } from '../model/Order'; 
 import { Drug_order } from '../model/Drug_order';
+import { RootURL } from '../model/RootURL';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class OrderService {
 
   constructor(public _http: HttpClient) { }
   
-  private root = "http://clinic"; 
+  private root = RootURL;  
 
   newOrder(orders: Order[]){
     const URL = this.root+"/ajax/post/order/new"; 
@@ -36,5 +37,10 @@ export class OrderService {
   getOrders(): Observable<Order[]>{
     const URL = this.root+"/ajax/get/order/get all"; 
     return this._http.get<Order[]>(URL); 
+  }
+
+  autorize(autorizedOrders: Order[]): Observable<Order[]>{
+    const URL = this.root+ "/ajax/update/order/autorize"; 
+    return this._http.put<Order[]>(URL, autorizedOrders); 
   }
 }

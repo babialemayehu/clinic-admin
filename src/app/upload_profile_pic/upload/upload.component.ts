@@ -10,7 +10,7 @@ import { User } from '../../model/User';
 })
 export class UploadComponent implements OnInit {
 
-  private pic: string =  "http://clinic/storage/avatar.jpg"; 
+  private pic: string =  "/storage/avatar.jpg"; 
   @Output() status = new EventEmitter(); 
 
   constructor(private _user: UserService) { }
