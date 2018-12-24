@@ -2,7 +2,7 @@
   <div class="indeterminate"></div>
 </div>
 <div class="form-conatiner" [class.form-loading]="loading">
-  <mat-icon matDialogClose class="right">close</mat-icon>
+  <mat-icon matDialogClose class="right" style="margin-right: 1.5em; cursor: pointer" (click)="thisDialog.close()" >close</mat-icon>
   <header class="container">
       <h5>Create User </h5> 
   </header>

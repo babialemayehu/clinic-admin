@@ -61,6 +61,7 @@ export class OrdersTableComponent implements OnInit {
   }
   select(e, order: Order){
     order.selected = e.checked; 
+    order.autorized_by = this.$auth.id; 
     this.refresh(); 
   }
 
@@ -102,7 +103,6 @@ export class OrdersTableComponent implements OnInit {
           this._order.autorize(this.$orders)
           .subscribe(
             (r) => {
-              console.log("successs");
               this._route.navigate(["/drugs"]); 
             }
           )
